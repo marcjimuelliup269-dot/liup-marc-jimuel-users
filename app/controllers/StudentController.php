@@ -32,4 +32,21 @@ class StudentController extends Controller {
 
         $this->call->view('student_profile', ['student' => $student]);
     }
+
+    public function database() {
+        $status = 'Connected';
+        $message = 'The database connection was initialized successfully.';
+
+        try {
+            $this->call->database();
+        } catch (Throwable $exception) {
+            $status = 'Connection failed';
+            $message = $exception->getMessage();
+        }
+
+        $this->call->view('database_status', [
+            'status' => $status,
+            'message' => $message
+        ]);
+    }
 }

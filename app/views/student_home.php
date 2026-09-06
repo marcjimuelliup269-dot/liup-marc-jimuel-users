@@ -259,7 +259,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
     <main class="container">
         <section class="hero">
             <div class="badge">Student Portal</div>
-            <h1>Marc JImuel <span class="highlight">Gutierrez</span> Liup</h1>
+            <h1>Marc Jimuel <span class="highlight">Gutierrez</span> Liup</h1>
             <p class="subtitle">
                 “Tables turn, bridges burn, you live and learn.”
             </p>

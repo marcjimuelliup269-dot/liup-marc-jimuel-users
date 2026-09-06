@@ -1,4 +1,4 @@
-ARG PHP_VERSION=8.5
+ARG PHP_VERSION=8.2
 
 FROM php:${PHP_VERSION}-apache
 
@@ -10,6 +10,9 @@ RUN a2enmod rewrite
 
 # Allow .htaccess overrides
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+
+# Serve the public front controller instead of exposing project internals
+COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy app files
 COPY . /var/www/html/

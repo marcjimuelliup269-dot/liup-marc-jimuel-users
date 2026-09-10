@@ -235,7 +235,12 @@ if (php_sapi_name() === 'cli') {
     $method = 'GET';
     
 } else {
-    $url = $router->sanitize_url(str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['PHP_SELF']));
+	if (php_sapi_name() === 'cli-server') {
+		$url = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+	} else {
+		$url = str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['PHP_SELF']);
+	}
+	$url = $router->sanitize_url($url);
     $method = isset($_SERVER['REQUEST_METHOD']) ? strtoupper($_SERVER['REQUEST_METHOD']) : 'GET';
 }
 

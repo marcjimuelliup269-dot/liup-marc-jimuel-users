@@ -19,4 +19,5 @@
         <label for="password">Password</label><input id="password" name="password" type="password" required autocomplete="current-password">
         <button type="submit">Sign in</button>
     </form>
+    <p><a href="/register">Create an account</a></p>
 </main></body></html>

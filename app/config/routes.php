@@ -47,6 +47,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 $router->get('/', 'AuthController@login');
 $router->get('/login', 'AuthController@login');
 $router->post('/login', 'AuthController@login');
+$router->get('/register', 'AuthController@register');
+$router->post('/register', 'AuthController@register');
 $router->post('/logout', 'AuthController@logout');
 
 $router->get('/products', 'ProductController@index')->middleware('auth');

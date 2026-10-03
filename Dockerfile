@@ -1,13 +1,5 @@
 ARG PHP_VERSION=8.2
 
-FROM node:22-alpine AS frontend-build
-
-WORKDIR /frontend
-COPY frontend/package*.json ./
-RUN npm ci
-COPY frontend/ ./
-RUN npm run build
-
 FROM php:${PHP_VERSION}-apache
 
 # Install PDO MySQL
@@ -25,7 +17,6 @@ COPY docker/start-apache.sh /usr/local/bin/start-apache.sh
 
 # Copy app files
 COPY . /var/www/html/
-COPY --from=frontend-build /frontend/dist/ /var/www/html/public/
 
 # Fix permissions
 RUN chown -R www-data:www-data /var/www/html \

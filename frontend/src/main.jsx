@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
-const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:3000').replace(/\/$/, '');
 
 async function parseResponse(response) {
   if (response.status === 204) return null;

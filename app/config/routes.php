@@ -57,3 +57,35 @@ $router->post('/products', 'ProductController@store')->middleware('auth');
 $router->get('/products/edit/{id}', 'ProductController@edit')->middleware('auth');
 $router->post('/products/{id}', 'ProductController@update')->middleware('auth');
 $router->post('/products/delete/{id}', 'ProductController@delete')->middleware('auth');
+
+if (defined('IS_CLI') && IS_CLI) {
+	$router->get('create-migration/{migration_class}', 'MigrationController::create_migration');
+	$router->get('migrate', 'MigrationController::migrate');
+	$router->get('rollback', 'MigrationController::rollback');
+	$router->get('rollback-all', 'MigrationController::rollback_all');
+	$router->get('refresh', 'MigrationController::refresh');
+	$router->get('status', 'MigrationController::status');
+} else {
+	$router->post('create-migration/{migration_class}', 'MigrationController::create_migration')->middleware('auth');
+	$router->post('migrate', 'MigrationController::migrate')->middleware('auth');
+	$router->post('rollback', 'MigrationController::rollback')->middleware('auth');
+	$router->post('rollback-all', 'MigrationController::rollback_all')->middleware('auth');
+	$router->post('refresh', 'MigrationController::refresh')->middleware('auth');
+	$router->get('status', 'MigrationController::status')->middleware('auth');
+}
+
+$router->post('/api/login', 'ApiController@login');
+$router->post('/api/register', 'ApiController@register');
+$router->post('/api/refresh', 'ApiController@refresh');
+$router->post('/api/logout', 'ApiController@logout');
+$router->get('/api/products', 'ApiController@index');
+$router->post('/api/products', 'ApiController@store');
+$router->put('/api/products/{id}', 'ApiController@update');
+$router->patch('/api/products/{id}', 'ApiController@update');
+$router->delete('/api/products/{id}', 'ApiController@delete');
+$router->options('/api/login', 'ApiController@options');
+$router->options('/api/register', 'ApiController@options');
+$router->options('/api/refresh', 'ApiController@options');
+$router->options('/api/logout', 'ApiController@options');
+$router->options('/api/products', 'ApiController@options');
+$router->options('/api/products/{id}', 'ApiController@options');

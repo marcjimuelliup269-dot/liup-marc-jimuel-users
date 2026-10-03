@@ -66,7 +66,10 @@ $allFrames[] = [
     'args'     => [],
 ];
 foreach ($traceFrames as $frame) {
-    if (!empty($frame['file'])) $allFrames[] = $frame;
+    if (!empty($frame['file'])) {
+        unset($frame['args']);
+        $allFrames[] = $frame;
+    }
 }
 
 $plainTrace = (!empty($trace) && is_string($trace)) ? $trace : null;

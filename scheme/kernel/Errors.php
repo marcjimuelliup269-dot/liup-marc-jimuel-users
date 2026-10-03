@@ -136,6 +136,11 @@ class Errors
 	 */
 	public function show_database_error($message, $sql = '', $bindings = [], $exception = null, $template = 'error_db')
 	{
+		if (defined('IS_CLI') && IS_CLI) {
+			fwrite(STDERR, "Database error: {$message}" . PHP_EOL);
+			exit(1);
+		}
+
 		$template_path = config_item('error_view_path');
 		if (empty($template_path)) {
 			$template_path = APP_DIR . 'views/errors/';

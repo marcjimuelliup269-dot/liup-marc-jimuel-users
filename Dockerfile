@@ -3,7 +3,7 @@ ARG PHP_VERSION=8.2
 FROM php:${PHP_VERSION}-apache
 
 # Install PDO MySQL
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo_mysql
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
